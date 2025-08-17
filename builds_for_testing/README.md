@@ -8,8 +8,9 @@ Welcome to the FlowSense testing builds! This directory contains ready-to-instal
 - **`FlowSense-debug.apk`** (202MB) - Debug build for development testing
 - **`FlowSense-release.apk`** (57MB) - Optimized release build for production-like testing
 
-### iOS App
+### iOS Apps
 - **`FlowSense.ipa`** (11MB) - iOS app bundle for iPhone/iPad testing
+- **`FlowSense-release.app`** (32MB) - iOS release app bundle (unsigned)
 
 ## 📱 Installation Instructions
 

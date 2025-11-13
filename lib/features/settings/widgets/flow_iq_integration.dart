@@ -21,7 +21,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
   Widget build(BuildContext context) {
     return Consumer<SettingsProvider>(
       builder: (context, settings, child) {
-        final isConnected = settings.preferences.syncWithCycleSync;
+      final isConnected = settings.preferences.syncWithFlowIQ;
         
         return SettingsSection(
           title: 'Flow iQ Integration',
@@ -149,14 +149,14 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
-                                Text(
-                                  settings.preferences.cycleSyncUserId ?? 'Unknown',
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: AppTheme.successGreen,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              Text(
+                                settings.preferences.flowIQUserId ?? 'Unknown',
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: AppTheme.successGreen,
+                                  fontWeight: FontWeight.bold,
                                 ),
+                              ),
                               ],
                             ),
                           ),
@@ -224,7 +224,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
               ),
             ],
 
-            // CycleSync Info
+            // Flow iQ Info
             Container(
               margin: const EdgeInsets.all(20),
               padding: const EdgeInsets.all(16),
@@ -315,7 +315,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
     }
   }
 
-  Future<void> _connectToCycleSync(BuildContext context, SettingsProvider settings) async {
+  Future<void> _connectToFlowIQ(BuildContext context, SettingsProvider settings) async {
     // Show consent dialog first
     final consent = await _showConsentDialog(context);
     
@@ -326,15 +326,15 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
     // Proceed with connection if user consented
     await Future.delayed(const Duration(seconds: 2));
     
-    // Generate a mock user ID for CycleSync
-    final cycleSyncUserId = 'cyclesync_${DateTime.now().millisecondsSinceEpoch}';
+    // Generate a mock user ID for Flow iQ
+    final flowIQUserId = 'flowiq_${DateTime.now().millisecondsSinceEpoch}';
     
-    await settings.updateCycleSyncIntegration(true, cycleSyncUserId);
+    await settings.updateFlowIQIntegration(true, flowIQUserId);
     
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Successfully connected to CycleSync!'),
+          content: const Text('Successfully connected to Flow iQ!'),
           backgroundColor: AppTheme.successGreen,
           action: SnackBarAction(
             label: 'Sync Now',
@@ -361,7 +361,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
               valueColor: AlwaysStoppedAnimation<Color>(AppTheme.successGreen),
             ),
             SizedBox(height: 16),
-            Text('Syncing with CycleSync...'),
+            Text('Syncing with Flow iQ...'),
           ],
         ),
       ),
@@ -474,7 +474,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
             const SizedBox(width: 12),
             const Expanded(
               child: Text(
-                'Connect to CycleSync',
+                'Connect to Flow iQ',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -489,14 +489,14 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'By connecting to CycleSync Enterprise, you agree to:',
+                'By connecting to Flow iQ Clinical, you agree to:',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
               SizedBox(height: 16),
-              Text('• Share your menstrual cycle data with CycleSync'),
+              Text('• Share your menstrual cycle data with Flow iQ'),
               Text('• Allow data synchronization across platforms'),
               Text('• Enable enhanced AI-powered health insights'),
               Text('• Receive personalized recommendations'),
@@ -515,7 +515,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
               Text('✓ Complies with healthcare privacy standards'),
               SizedBox(height: 16),
               Text(
-                'Do you consent to connect your FlowSense data with CycleSync Enterprise?',
+                'Do you consent to connect your Flow Ai data with Flow iQ Clinical?',
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   color: AppTheme.darkGrey,
@@ -732,14 +732,14 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('CycleSync Integration'),
+        title: const Text('Flow iQ Integration'),
         content: const SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'What is CycleSync?',
+                'What is Flow iQ?',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
@@ -747,7 +747,7 @@ class _FlowIQIntegrationState extends State<FlowIQIntegration> {
               ),
               SizedBox(height: 8),
               Text(
-                'CycleSync Enterprise is our comprehensive menstrual health platform that provides advanced analytics, AI-powered insights, and seamless data synchronization across multiple devices and applications.',
+                'Flow iQ Clinical is our comprehensive menstrual health platform that provides advanced analytics, AI-powered insights, and seamless data synchronization across multiple devices and applications.',
               ),
               SizedBox(height: 16),
               Text(

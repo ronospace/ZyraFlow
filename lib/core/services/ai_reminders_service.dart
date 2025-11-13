@@ -391,7 +391,7 @@ class AIRemindersService {
           'urgent': 'Important: Complete wellness check! 📊',
         };
       default:
-        return {'default': 'FlowSense Reminder 🌸'};
+        return {'default': 'Flow Ai Reminder 🌸'};
     }
   }
   
@@ -434,7 +434,7 @@ class AIRemindersService {
           'urgent': 'Complete your wellness check now! Important for tracking your health trends.',
         };
       default:
-        return {'default': 'Time to check in with FlowSense!'};
+        return {'default': 'Time to check in with Flow Ai!'};
     }
   }
   

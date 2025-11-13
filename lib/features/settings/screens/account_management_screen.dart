@@ -654,9 +654,9 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
       
       // Create sample CSV data
       const csvData = '''Date,Cycle Day,Flow Intensity,Symptoms,Mood,Energy
-2024-01-15,1,Heavy,Cramps;Headache,3,2
-2024-01-16,2,Medium,Fatigue,4,3
-2024-01-17,3,Light,None,5,4''';
+2025-01-15,1,Heavy,Cramps;Headache,3,2
+2025-01-16,2,Medium,Fatigue,4,3
+2025-01-17,3,Light,None,5,4''';
 
       // Share the data
       await Share.share(

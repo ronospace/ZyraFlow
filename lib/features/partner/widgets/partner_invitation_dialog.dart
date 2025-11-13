@@ -407,7 +407,7 @@ class _PartnerInvitationDialogState extends State<PartnerInvitationDialog>
                 const SizedBox(height: 16),
                 
                 Text(
-                  'FlowSense Partner Invitation',
+                  'Flow Ai Partner Invitation',
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppTheme.darkGrey,
@@ -658,7 +658,7 @@ class _PartnerInvitationDialogState extends State<PartnerInvitationDialog>
   }
 
   String _generateInvitationLink(PartnerInvitation invitation) {
-    return 'https://flowsense.app/join/${invitation.invitationCode}';
+    return 'https://flowai.app/join/${invitation.invitationCode}';
   }
 
   void _copyToClipboard(String text) {
@@ -677,8 +677,8 @@ class _PartnerInvitationDialogState extends State<PartnerInvitationDialog>
     if (_generatedInvitation != null) {
       final link = _generateInvitationLink(_generatedInvitation!);
       Share.share(
-        'Join me on FlowSense! Use this link to connect and share our cycle journey together: $link',
-        subject: 'FlowSense Partner Invitation',
+        'Join me on Flow Ai! Use this link to connect and share our cycle journey together: $link',
+        subject: 'Flow Ai Partner Invitation',
       );
     }
   }

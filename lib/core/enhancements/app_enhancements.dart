@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../theme/app_theme.dart';
 
-/// Comprehensive app enhancements to make the FlowSense app more captivating
+/// Comprehensive app enhancements to make the Flow Ai app more captivating
 class AppEnhancements {
   
   /// Enhanced haptic feedback system

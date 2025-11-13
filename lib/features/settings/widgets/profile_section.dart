@@ -144,7 +144,7 @@ class ProfileSection extends StatelessWidget {
                           color: Colors.white.withValues(alpha: 0.2),
                         ),
                         const SizedBox(width: 8),
-                        if (preferences.syncWithCycleSync)
+                        if (preferences.syncWithFlowIQ)
                           _buildStatChip(
                             icon: Icons.sync,
                             label: 'SYNC',

@@ -21,7 +21,7 @@ import '../widgets/settings_tile.dart';
 import '../widgets/language_selector.dart';
 import '../widgets/theme_selector.dart';
 import '../widgets/profile_section.dart';
-import '../widgets/cyclesync_integration.dart';
+import '../widgets/flow_iq_integration.dart';
 import '../widgets/theme_switcher_card.dart';
 import 'help_screen.dart';
 import 'account_management_screen.dart';
@@ -573,7 +573,7 @@ class _SettingsScreenState extends State<SettingsScreen> with TickerProviderStat
       context: context,
       applicationName: 'Flow Ai',
       applicationVersion: '2.0.0',
-      applicationLegalese: '© 2024 Flow Ai. All rights reserved.',
+      applicationLegalese: '© 2025 ZyraFlow Inc.™ All rights reserved.\nDeveloped and maintained by ZyraFlow Inc.™',
       children: [
         const Text('AI-powered menstrual cycle tracking for better reproductive health.'),
       ],

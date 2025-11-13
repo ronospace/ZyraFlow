@@ -311,11 +311,11 @@ class SettingsProvider extends ChangeNotifier {
     await _savePreferences();
   }
 
-  // Update CycleSync integration
-  Future<void> updateCycleSyncIntegration(bool enabled, String? userId) async {
+  // Update Flow iQ integration
+  Future<void> updateFlowIQIntegration(bool enabled, String? userId) async {
     _preferences = _preferences.copyWith(
-      syncWithCycleSync: enabled,
-      cycleSyncUserId: userId,
+      syncWithFlowIQ: enabled,
+      flowIQUserId: userId,
       lastUpdated: DateTime.now(),
     );
     notifyListeners();

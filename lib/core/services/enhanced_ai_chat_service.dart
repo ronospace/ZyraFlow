@@ -1000,8 +1000,9 @@ class EnhancedAIChatService {
   types.User? get currentUser => _currentUser;
   
   /// Get memory statistics for debugging
-  Map<String, dynamic> getMemoryStats() {
-    return _conversationMemory?.getMemoryStats() ?? {};
+  Future<Map<String, dynamic>> getMemoryStats() async {
+    if (_conversationMemory == null) return {};
+    return await _conversationMemory!.getMemoryStats();
   }
   
   /// Store a personalized insight about the user

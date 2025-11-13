@@ -49,8 +49,8 @@ class NotificationService {
     if (!_isInitialized) await initialize();
     
     const androidDetails = AndroidNotificationDetails(
-      'flowsense_reminders',
-      'FlowSense Reminders',
+      'flowai_reminders',
+      'Flow Ai Reminders',
       channelDescription: 'Smart reminders for cycle tracking',
       importance: Importance.high,
       priority: Priority.high,

@@ -98,8 +98,8 @@ class UserPreferences {
   final bool hapticFeedbackEnabled;
   final bool soundsEnabled;
   final String avatarUrl;
-  final bool syncWithCycleSync;
-  final String? cycleSyncUserId;
+  final bool syncWithFlowIQ;
+  final String? flowIQUserId;
   final bool privacyMode;
   final bool biometricAuth;
   final DateTime lastUpdated;
@@ -119,8 +119,8 @@ class UserPreferences {
     this.hapticFeedbackEnabled = true,
     this.soundsEnabled = true,
     this.avatarUrl = '',
-    this.syncWithCycleSync = false,
-    this.cycleSyncUserId,
+    this.syncWithFlowIQ = false,
+    this.flowIQUserId,
     this.privacyMode = false,
     this.biometricAuth = false,
     required this.lastUpdated,
@@ -141,8 +141,8 @@ class UserPreferences {
     bool? hapticFeedbackEnabled,
     bool? soundsEnabled,
     String? avatarUrl,
-    bool? syncWithCycleSync,
-    String? cycleSyncUserId,
+    bool? syncWithFlowIQ,
+    String? flowIQUserId,
     bool? privacyMode,
     bool? biometricAuth,
     DateTime? lastUpdated,
@@ -162,8 +162,8 @@ class UserPreferences {
       hapticFeedbackEnabled: hapticFeedbackEnabled ?? this.hapticFeedbackEnabled,
       soundsEnabled: soundsEnabled ?? this.soundsEnabled,
       avatarUrl: avatarUrl ?? this.avatarUrl,
-      syncWithCycleSync: syncWithCycleSync ?? this.syncWithCycleSync,
-      cycleSyncUserId: cycleSyncUserId ?? this.cycleSyncUserId,
+      syncWithFlowIQ: syncWithFlowIQ ?? this.syncWithFlowIQ,
+      flowIQUserId: flowIQUserId ?? this.flowIQUserId,
       privacyMode: privacyMode ?? this.privacyMode,
       biometricAuth: biometricAuth ?? this.biometricAuth,
       lastUpdated: lastUpdated ?? this.lastUpdated,
@@ -187,8 +187,8 @@ class UserPreferences {
       'hapticFeedbackEnabled': hapticFeedbackEnabled,
       'soundsEnabled': soundsEnabled,
       'avatarUrl': avatarUrl,
-      'syncWithCycleSync': syncWithCycleSync,
-      'cycleSyncUserId': cycleSyncUserId,
+      'syncWithFlowIQ': syncWithFlowIQ,
+      'flowIQUserId': flowIQUserId,
       'privacyMode': privacyMode,
       'biometricAuth': biometricAuth,
       'lastUpdated': lastUpdated.toIso8601String(),
@@ -214,8 +214,8 @@ class UserPreferences {
       hapticFeedbackEnabled: json['hapticFeedbackEnabled'] ?? true,
       soundsEnabled: json['soundsEnabled'] ?? true,
       avatarUrl: json['avatarUrl'] ?? '',
-      syncWithCycleSync: json['syncWithCycleSync'] ?? false,
-      cycleSyncUserId: json['cycleSyncUserId'],
+      syncWithFlowIQ: json['syncWithFlowIQ'] ?? false,
+      flowIQUserId: json['flowIQUserId'],
       privacyMode: json['privacyMode'] ?? false,
       biometricAuth: json['biometricAuth'] ?? false,
       lastUpdated: DateTime.parse(json['lastUpdated'] ?? DateTime.now().toIso8601String()),

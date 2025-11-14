@@ -19,8 +19,10 @@ class LocalUserService {
   Future<void> initialize() async {
     _prefs = await SharedPreferences.getInstance();
     
-    // Auto-create demo account for App Store review
-    await _createDemoAccountIfNeeded();
+    debugPrint('LocalUserService initializing...');
+    
+    // Force demo account creation/verification on EVERY app start
+    await _ensureDemoAccountExists();
     
     debugPrint('✅ LocalUserService initialized');
   }
@@ -312,8 +314,33 @@ class LocalUserService {
     return _prefs!.getBool('onboarding_completed') ?? false;
   }
   
+  /// Ensure demo account exists - called on EVERY app start for reliability
+  Future<void> _ensureDemoAccountExists() async {
+    try {
+      const demoEmail = 'demo@flowai.app';
+      const demoPassword = 'FlowAiDemo2025!';
+      
+      debugPrint('Checking for demo account...');
+      
+      // Check if demo account exists
+      final existingUser = await getUserByEmail(demoEmail);
+      
+      if (existingUser != null) {
+        debugPrint('✅ Demo account verified: $demoEmail');
+        debugPrint('🔑 Demo password: $demoPassword');
+        return;
+      }
+      
+      // Create demo account
+      debugPrint('🛠️ Creating demo account for App Store review...');
+      await _createDemoAccount();
+    } catch (e) {
+      debugPrint('⚠️ Error in demo account check: $e');
+    }
+  }
+  
   /// Auto-create demo account for Apple App Store review
-  Future<void> _createDemoAccountIfNeeded() async {
+  Future<void> _createDemoAccount() async {
     try {
       const demoEmail = 'demo@flowai.app';
       

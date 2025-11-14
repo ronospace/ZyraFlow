@@ -314,88 +314,210 @@ class LocalUserService {
     return _prefs!.getBool('onboarding_completed') ?? false;
   }
   
-  /// Ensure demo account exists - called on EVERY app start for reliability
+  /// Ensure all test accounts exist - called on EVERY app start for reliability
   Future<void> _ensureDemoAccountExists() async {
     try {
-      const demoEmail = 'demo@flowai.app';
-      const demoPassword = 'FlowAiDemo2025!';
+      debugPrint('🔍 Checking for test accounts...');
       
-      debugPrint('Checking for demo account...');
-      
-      // Check if demo account exists
-      final existingUser = await getUserByEmail(demoEmail);
-      
-      if (existingUser != null) {
-        debugPrint('✅ Demo account verified: $demoEmail');
-        debugPrint('🔑 Demo password: $demoPassword');
-        return;
-      }
-      
-      // Create demo account
-      debugPrint('🛠️ Creating demo account for App Store review...');
-      await _createDemoAccount();
+      // Create all 5 test accounts
+      await _ensureTestAccountsExist();
     } catch (e) {
-      debugPrint('⚠️ Error in demo account check: $e');
+      debugPrint('⚠️ Error in test accounts check: $e');
     }
   }
   
-  /// Auto-create demo account for Apple App Store review
-  Future<void> _createDemoAccount() async {
-    try {
-      const demoEmail = 'demo@flowai.app';
+  /// Ensure all 5 test accounts exist with different data profiles
+  Future<void> _ensureTestAccountsExist() async {
+    final testAccounts = [
+      {
+        'email': 'demo@flowai.app',
+        'password': 'FlowAiDemo2025!',
+        'name': 'Demo User for App Review',
+        'username': 'demo_reviewer',
+        'age': 28,
+        'cycleLength': 28,
+        'daysAgo': 15,
+        'hasData': true,
+        'dataMonths': 6,
+      },
+      {
+        'email': 'tester1@flowai.app',
+        'password': 'FlowTest2025!',
+        'name': 'Sarah Test User',
+        'username': 'sarah_test',
+        'age': 26,
+        'cycleLength': 29,
+        'daysAgo': 12,
+        'hasData': true,
+        'dataMonths': 3,
+      },
+      {
+        'email': 'tester2@flowai.app',
+        'password': 'FlowTest2025!',
+        'name': 'Emma Test User',
+        'username': 'emma_test',
+        'age': 24,
+        'cycleLength': 27,
+        'daysAgo': 8,
+        'hasData': true,
+        'dataMonths': 1,
+      },
+      {
+        'email': 'qa@flowai.app',
+        'password': 'FlowQA2025!',
+        'name': 'QA Test Account',
+        'username': 'qa_tester',
+        'age': 0,
+        'cycleLength': 0,
+        'daysAgo': 0,
+        'hasData': false,
+        'dataMonths': 0,
+      },
+      {
+        'email': 'dev@flowai.app',
+        'password': 'FlowDev2025!',
+        'name': 'Developer Test Account',
+        'username': 'dev_tester',
+        'age': 30,
+        'cycleLength': 28,
+        'daysAgo': 20,
+        'hasData': true,
+        'dataMonths': 12,
+      },
+    ];
+    
+    int created = 0;
+    int verified = 0;
+    
+    for (final account in testAccounts) {
+      final email = account['email'] as String;
+      final existingUser = await getUserByEmail(email);
       
-      // Check if demo account already exists
-      final existingUser = await getUserByEmail(demoEmail);
       if (existingUser != null) {
-        debugPrint('✅ Demo account already exists for App Store review');
+        verified++;
+        debugPrint('✅ Test account verified: $email');
+      } else {
+        await _createTestAccount(account);
+        created++;
+        debugPrint('🆕 Test account created: $email');
+      }
+    }
+    
+    debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    debugPrint('📋 TEST ACCOUNTS STATUS');
+    debugPrint('✅ Verified: $verified');
+    debugPrint('🆕 Created: $created');
+    debugPrint('📧 Total: ${testAccounts.length}');
+    debugPrint('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+  }
+  
+  /// Create individual test account based on configuration map
+  Future<void> _createTestAccount(Map<String, dynamic> config) async {
+    try {
+      final email = config['email'] as String;
+      final password = config['password'] as String;
+      final displayName = config['name'] as String;
+      final username = config['username'] as String;
+      final age = config['age'] as int;
+      final cycleLength = config['cycleLength'] as int;
+      final daysAgo = config['daysAgo'] as int;
+      final hasData = config['hasData'] as bool;
+      final dataMonths = config['dataMonths'] as int;
+      
+      // Check if account already exists
+      final existingUser = await getUserByEmail(email);
+      if (existingUser != null) {
         return;
       }
       
-      // Create demo account with complete profile for App Store reviewers
+      // Create test account
       final result = await createUser(
-        email: demoEmail,
-        password: 'FlowAiDemo2025!',
-        displayName: 'Demo User for App Review',
-        username: 'demo_reviewer',
+        email: email,
+        password: password,
+        displayName: displayName,
+        username: username,
       );
       
       if (result.isSuccess && result.user != null) {
-        // Add some sample data for the demo account to show app functionality
-        final demoUser = result.user!;
-        final updatedProfileData = demoUser.profileData.copyWith(
-          age: 28,
-          cycleLength: 28,
-          lastPeriodDate: DateTime.now().subtract(const Duration(days: 15)),
-          averageCycleLength: 28,
-          notes: [
-            'Welcome to Flow Ai! This is a demo account for App Store reviewers.',
-            'You can explore all features including cycle tracking, mood logging, and AI insights.',
-            'This account has sample data to demonstrate the app\'s capabilities.',
-          ],
-          symptoms: [
-            'Sample symptom: Mild cramping (Day 1)',
-            'Sample symptom: Light flow (Day 2-3)',
-            'Sample symptom: Energy boost (Day 7)',
-          ],
+        final testUser = result.user!;
+        
+        // QA account: no data, no onboarding
+        if (!hasData) {
+          debugPrint('✅ Clean slate account created: $email');
+          return;
+        }
+        
+        // Add profile data based on configuration
+        final notes = _generateNotesForAccount(displayName, dataMonths);
+        final symptoms = _generateSymptomsForAccount(dataMonths);
+        
+        final updatedProfileData = testUser.profileData.copyWith(
+          age: age,
+          cycleLength: cycleLength,
+          lastPeriodDate: DateTime.now().subtract(Duration(days: daysAgo)),
+          averageCycleLength: cycleLength,
+          notes: notes,
+          symptoms: symptoms,
         );
         
-        final updatedUser = demoUser.copyWith(
+        final updatedUser = testUser.copyWith(
           profileData: updatedProfileData,
         );
         
         await updateUserProfile(updatedUser);
         
-        // Set onboarding as completed for smooth demo experience
+        // Set onboarding as completed for accounts with data
         await setOnboardingCompleted(true);
         
-        debugPrint('✅ Demo account auto-created for App Store review with sample data');
-        debugPrint('📧 Demo credentials: demo@flowai.app / FlowAiDemo2025!');
-      } else {
-        debugPrint('❌ Failed to create demo account: ${result.error}');
+        debugPrint('✅ Test account created with $dataMonths months data: $email');
       }
     } catch (e) {
-      debugPrint('⚠️ Error creating demo account: $e');
-      // Don\'t throw error - this is a non-critical enhancement
+      debugPrint('⚠️ Error creating test account: $e');
+    }
+  }
+  
+  /// Generate sample notes based on account profile
+  List<String> _generateNotesForAccount(String name, int months) {
+    if (months >= 6) {
+      return [
+        'Welcome to Flow Ai! This account has $months months of sample data.',
+        'Use this account to explore all features with realistic cycle patterns.',
+        'AI predictions are calibrated for accurate insights demonstration.',
+      ];
+    } else if (months >= 3) {
+      return [
+        'This is a test account with $months months of cycle tracking data.',
+        'Perfect for testing regular user features and AI predictions.',
+      ];
+    } else {
+      return [
+        'New user account with $months month of data.',
+        'Ideal for testing early-stage user experience.',
+      ];
+    }
+  }
+  
+  /// Generate sample symptoms based on data history
+  List<String> _generateSymptomsForAccount(int months) {
+    if (months >= 6) {
+      return [
+        'Historical: Mild cramping (Day 1-2)',
+        'Historical: Moderate flow (Day 2-4)',
+        'Historical: Energy fluctuations (Day 7-10)',
+        'Historical: Mood variations tracked',
+        'Historical: Sleep patterns logged',
+      ];
+    } else if (months >= 3) {
+      return [
+        'Sample: Light cramping (Day 1)',
+        'Sample: Regular flow (Day 2-4)',
+        'Sample: Energy boost mid-cycle',
+      ];
+    } else {
+      return [
+        'Sample: Basic symptom tracking',
+        'Sample: Flow monitoring',
+      ];
     }
   }
   

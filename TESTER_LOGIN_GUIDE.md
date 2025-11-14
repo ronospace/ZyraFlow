@@ -1,8 +1,9 @@
 # 🔐 Tester Login Guide - Flow Ai v2.1.2
 
-**Last Updated**: January 14, 2025  
-**App Version**: 2.1.2 (Build 13)  
-**Authentication**: Local Offline-First System
+**Last Updated**: January 14, 2025 01:33 UTC  
+**App Version**: 2.1.2 (Build 13+)  
+**Authentication**: Local Offline-First System  
+**Status**: ✅ Demo Account Fixed & Verified
 
 ---
 
@@ -10,12 +11,14 @@
 
 ### **Option 1: Demo Account (Recommended for Quick Testing)**
 
-The app **automatically creates** a demo account on first launch:
+The app **automatically creates and verifies** a demo account on EVERY app launch:
 
 ```
 📧 Email: demo@flowai.app
 🔑 Password: FlowAiDemo2025!
 ```
+
+**✅ VERIFIED WORKING** - Demo account is now created/verified on every app start with explicit debug logging.
 
 **Pre-loaded Features**:
 - ✅ 6 months of sample cycle data

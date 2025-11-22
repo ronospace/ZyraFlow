@@ -2257,7 +2257,7 @@ extension _PremiumFeaturesMethods on _HomeScreenState {
                 'Personal health guidance powered by advanced AI',
                 Icons.psychology_rounded,
                 AppTheme.primaryPurple,
-                'Q2 2024',
+                'Q2 2026',
                 () => _showComingSoonDialog('AI Health Coach'),
               ),
               
@@ -2266,7 +2266,7 @@ extension _PremiumFeaturesMethods on _HomeScreenState {
                 'Securely share cycle data with trusted partners',
                 Icons.favorite_rounded,
                 AppTheme.primaryRose,
-                'Q3 2024',
+                'Q3 2026',
                 () => _showComingSoonDialog('Partner Integration'),
               ),
               
@@ -2275,7 +2275,7 @@ extension _PremiumFeaturesMethods on _HomeScreenState {
                 'Export data for medical appointments',
                 Icons.medical_services_rounded,
                 AppTheme.secondaryBlue,
-                'Q4 2024',
+                'Q4 2026',
                 () => _showComingSoonDialog('Healthcare Provider Portal'),
               ),
               
@@ -2284,7 +2284,7 @@ extension _PremiumFeaturesMethods on _HomeScreenState {
                 'Deep insights with predictive modeling',
                 Icons.analytics_rounded,
                 AppTheme.accentMint,
-                'Q1 2024',
+                'Q1 2026',
                 () => _showComingSoonDialog('Premium Analytics'),
               ),
             ],
@@ -2464,7 +2464,7 @@ extension _PremiumFeaturesMethods on _HomeScreenState {
           title: featureName,
           description: 'This advanced feature is currently under development and will be available soon.',
           icon: Icons.auto_awesome,
-          estimatedDate: 'Q2 2024',
+          estimatedDate: 'Q2 2026',
           onNotifyMe: () => _handleNotifyMe(featureName),
         );
     }

@@ -398,7 +398,7 @@ class ComingSoonWidgets {
         'Integration with wearable devices and health apps',
         'Real-time coaching and support throughout your cycle',
       ],
-      estimatedDate: 'Q2 2024',
+      estimatedDate: 'Q2 2026',
       onNotifyMe: onNotifyMe,
       gradientColors: [
         AppTheme.primaryPurple.withValues(alpha: 0.1),
@@ -420,7 +420,7 @@ class ComingSoonWidgets {
         'Shared calendar and reminders',
         'Partner education and resources',
       ],
-      estimatedDate: 'Q3 2024',
+      estimatedDate: 'Q3 2026',
       onNotifyMe: onNotifyMe,
     );
   }
@@ -438,7 +438,7 @@ class ComingSoonWidgets {
         'Customizable reports for different conditions',
         'Telehealth consultation scheduling',
       ],
-      estimatedDate: 'Q4 2024',
+      estimatedDate: 'Q4 2026',
       onNotifyMe: onNotifyMe,
     );
   }
@@ -456,7 +456,7 @@ class ComingSoonWidgets {
         'Fertility window optimization',
         'Long-term health trend analysis',
       ],
-      estimatedDate: 'Q1 2024',
+      estimatedDate: 'Q1 2026',
       onNotifyMe: onNotifyMe,
     );
   }

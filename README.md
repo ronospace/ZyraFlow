@@ -328,9 +328,7 @@ This project is proprietary software developed and maintained by **ZyraFlow Inc.
 
 ## ⚕️ Medical Disclaimer
 
-Flow Ai is designed as a menstrual health tracking and wellbeing analytics platform. **It is not intended to diagnose, treat, cure, or prevent any disease.** Always consult with a qualified healthcare professional for medical advice, diagnosis, or treatment.
-
----
+Flow Ai is designed as a menstrual health tracking and wellbeing analytics platform. It is not intended to diagnose, treat, cure, or prevent any disease. Always consult with a qualified healthcare professional for medical advice, diagnosis, or treatment.
 
 Made with ❤️ by ZyraFlow Inc.
 

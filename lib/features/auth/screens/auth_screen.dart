@@ -373,6 +373,11 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           _buildSocialLogin(theme),
           
           const SizedBox(height: 32),
+          
+          // Demo Account Info Button (matching Flow-iQ design)
+          _buildDemoAccountButton(theme),
+          
+          const SizedBox(height: 32),
         ],
       ),
     );
@@ -450,6 +455,137 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           .fadeIn(delay: 200.ms),
       ],
     );
+  }
+  
+  Widget _buildDemoAccountButton(ThemeData theme) {
+    return OutlinedButton.icon(
+      onPressed: _isLoading ? null : _showDemoAccountDialog,
+      icon: const Icon(Icons.info_outline, size: 20),
+      label: const Text('Demo Account Info'),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: AppTheme.secondaryBlue,
+        side: BorderSide(color: AppTheme.secondaryBlue.withValues(alpha: 0.3), width: 1.5),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    ).animate(controller: _socialController)
+      .fadeIn(delay: 400.ms)
+      .slideY(begin: 0.3, end: 0);
+  }
+  
+  void _showDemoAccountDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(28),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Demo Account',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'For App Store Review:',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildDemoInfoRow('Email:', 'demo@flowai.app'),
+              const SizedBox(height: 12),
+              _buildDemoInfoRow('Password:', 'FlowAiDemo2025!'),
+              const SizedBox(height: 20),
+              const Text(
+                'This account has full access to all features and sample data for review purposes.',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Close'),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      _useDemoAccount();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppTheme.secondaryBlue,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text('Use Demo Account'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  
+  Widget _buildDemoInfoRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 90,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 14,
+              fontFamily: 'monospace',
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  
+  void _useDemoAccount() {
+    setState(() {
+      _isLogin = true;
+      _emailController.text = 'demo@flowai.app';
+      _passwordController.text = 'FlowAiDemo2025!';
+    });
   }
   
   Future<void> _handleBiometricLogin() async {

@@ -10,6 +10,7 @@ import '../widgets/biometric_chart_widget.dart';
 import '../widgets/health_metrics_card.dart';
 import '../widgets/correlation_insights_card.dart';
 import '../widgets/biometric_sync_status.dart';
+import '../widgets/healthkit_indicator_widget.dart';
 
 class BiometricDashboardScreen extends StatefulWidget {
   const BiometricDashboardScreen({super.key});
@@ -192,6 +193,11 @@ class _BiometricDashboardScreenState extends State<BiometricDashboardScreen>
             children: [
               // Custom App Bar
               _buildAppBar(),
+              
+              // HealthKit Indicator (Apple App Store Compliance)
+              HealthKitIndicatorWidget(
+                isConnected: _hasPermission,
+              ),
               
               // Status Banner
               if (_hasPermission && _currentAnalysis != null)

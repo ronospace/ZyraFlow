@@ -5,6 +5,7 @@ import '../../../generated/app_localizations.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/models/ai_insights.dart';
 import '../../../core/models/medical_citation.dart';
+import 'citation_button_widget.dart';
 
 class AIInsightCard extends StatelessWidget {
   final AIInsight insight;
@@ -95,6 +96,12 @@ class AIInsightCard extends StatelessWidget {
                   ),
                 ),
               ),
+              // Citation Button (Apple App Store Compliance)
+              CitationButtonWidget(
+                insightType: _getInsightTypeLabel(),
+                sources: MedicalCitations.getSourcesForInsightType(_getInsightTypeLabel()),
+              ),
+              const SizedBox(width: 8),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -320,6 +327,37 @@ class AIInsightCard extends StatelessWidget {
       return AppTheme.primaryPurple;
     } else {
       return AppTheme.mediumGrey;
+    }
+  }
+  
+  String _getInsightTypeLabel() {
+    switch (insight.type) {
+      case InsightType.cycleRegularity:
+        return 'Cycle Prediction';
+      case InsightType.symptomPattern:
+        return 'Symptom Correlation';
+      case InsightType.healthTrend:
+        return 'Health Condition';
+      case InsightType.fertilityWindow:
+        return 'Fertility Window';
+      case InsightType.moodPattern:
+        return 'Symptom Prediction';
+      case InsightType.energyPattern:
+        return 'Symptom Prediction';
+      case InsightType.cyclePattern:
+        return 'Cycle Prediction';
+      case InsightType.predictionAccuracy:
+        return 'Cycle Prediction';
+      case InsightType.phaseAnalysis:
+        return 'Cycle Prediction';
+      case InsightType.correlationInsight:
+        return 'Biometric';
+      case InsightType.healthRecommendation:
+        return 'Health Condition';
+      case InsightType.nutritionGuidance:
+        return 'Health Condition';
+      case InsightType.sleepOptimization:
+        return 'Biometric';
     }
   }
   

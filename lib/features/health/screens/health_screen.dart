@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../generated/app_localizations.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/health_provider.dart';
+import '../../biometric/widgets/healthkit_indicator_widget.dart';
 import 'dart:math' as math;
 
 class HealthScreen extends StatefulWidget {
@@ -84,6 +85,10 @@ class _HealthScreenState extends State<HealthScreen> with TickerProviderStateMix
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildHealthHeader(localizations),
+                    const SizedBox(height: 16),
+                    
+                    // HealthKit Indicator (Apple App Store Compliance)
+                    const HealthKitIndicatorWidget(isConnected: true),
                     const SizedBox(height: 24),
                     
                     _buildHealthScoreCard(localizations),

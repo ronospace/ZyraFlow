@@ -326,30 +326,16 @@ This project is proprietary software developed and maintained by **ZyraFlow Inc.
 
 ---
 
-**Flow Ai - Building trust through AI transparency** 🌸
-
----
-
-### 🏢 About ZyraFlow Inc.
-
-ZyraFlow Inc.™ is dedicated to empowering women through innovative AI-powered health technology. Our mission is to provide accessible, privacy-first menstrual health tracking with transparency and scientific rigor.
-
 ## ⚕️ Medical Disclaimer
 
 Flow Ai is designed as a menstrual health tracking and wellbeing analytics platform. **It is not intended to diagnose, treat, cure, or prevent any disease.** Always consult with a qualified healthcare professional for medical advice, diagnosis, or treatment.
 
-The AI predictions and insights provided by Flow Ai are based on statistical models and machine learning algorithms. They should be used for informational purposes only and not as a substitute for professional medical advice.
-
 ---
 
-**Developed and Maintained by ZyraFlow Inc.™**  
-
-Made with ❤️ by [ZyraFlow Inc.](https://github.com/ronospace/ZyraFlow)
+Made with ❤️ by ZyraFlow Inc.
 
 *Empowering wellness through intelligent insights*
 
 © 2025 ZyraFlow Inc.™ All rights reserved.
 
-**Related Projects:**
-- **Flow iQ** - [AI-powered clinical decision support for healthcare providers](https://github.com/ronospace/Flow-iQ)
-- **Flow Ai** - Consumer menstrual health tracking (this project)
+[⬆ Back to top](#-flow-ai)

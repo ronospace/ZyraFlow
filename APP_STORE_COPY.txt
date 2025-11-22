@@ -78,23 +78,19 @@ Whether you're tracking for pregnancy planning, avoiding pregnancy, understandin
 • Regular updates and improvements
 • Responsive customer support
 
-FREE FEATURES:
+ALL FEATURES INCLUDED FREE:
 ✓ Unlimited cycle tracking
-✓ AI-powered predictions
-✓ 70+ symptom logging
-✓ Health dashboard
-✓ Calendar view
-✓ Basic data export
-✓ AI chat assistant
-
-PREMIUM FEATURES:
-• Ad-free experience
-• Advanced AI insights
-• Unlimited data export
-• Priority support
-• Early access to new features
-• Custom reminders
-• Advanced analytics
+✓ AI-powered predictions with confidence scores
+✓ 70+ symptom logging with severity ratings
+✓ Comprehensive health dashboard
+✓ Beautiful calendar view
+✓ Complete data export (PDF/CSV/JSON)
+✓ AI chat assistant for health questions
+✓ Dark mode with automatic switching
+✓ 36 languages supported
+✓ Medical-grade privacy and encryption
+✓ Biometric authentication (Face ID/Touch ID)
+✓ Offline-first with optional cloud sync
 
 Download Flow Ai today and take control of your menstrual health with the power of artificial intelligence!
 

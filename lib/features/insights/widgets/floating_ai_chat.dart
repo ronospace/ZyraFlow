@@ -7,6 +7,7 @@ import '../../../core/services/enhanced_ai_chat_service.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../generated/app_localizations.dart';
 import '../../settings/providers/settings_provider.dart';
+import '../widgets/citation_button_widget.dart';
 import 'package:uuid/uuid.dart';
 
 /// Floating AI Chat Widget for insights screen
@@ -655,6 +656,7 @@ class _FloatingAIChatState extends State<FloatingAIChat>
           onMessageTap: _handleMessageTap,
           onPreviewDataFetched: _handlePreviewDataFetched,
           user: _chatService.currentUser ?? types.User(id: 'fallback_user'),
+          bubbleBuilder: _customBubbleBuilder,
           theme: DefaultChatTheme(
             primaryColor: AppTheme.primaryRose,
             secondaryColor: AppTheme.secondaryBlue.withValues(alpha: 0.1),
@@ -886,6 +888,214 @@ class _FloatingAIChatState extends State<FloatingAIChat>
                   ),
                 ),
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  // Custom bubble builder to add citation button to AI messages
+  Widget _customBubbleBuilder(
+    Widget child, {
+    required types.Message message,
+    required bool nextMessageInGroup,
+  }) {
+    final theme = Theme.of(context);
+    final isAI = message.author.id == 'ai_flowai_enhanced';
+    
+    if (!isAI || message is! types.TextMessage) {
+      return child; // Return default bubble for user messages
+    }
+    
+    // For AI messages, wrap with citation button
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        child,
+        const SizedBox(height: 8),
+        // Citation button
+        Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: InkWell(
+            onTap: () => _showAICitationDialog(),
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppTheme.secondaryBlue.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: AppTheme.secondaryBlue.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.science_outlined,
+                    size: 14,
+                    color: AppTheme.secondaryBlue,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'View Sources',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.secondaryBlue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+  
+  void _showAICitationDialog() {
+    final theme = Theme.of(context);
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: theme.cardColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [AppTheme.secondaryBlue, AppTheme.accentMint],
+                ),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(
+                Icons.science,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 12),
+            const Expanded(
+              child: Text(
+                'AI Health Information Sources',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'This AI health information is based on:',
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 16),
+              _buildCitationItem(
+                '1. Medical Guidelines',
+                'American College of Obstetricians and Gynecologists (ACOG) and World Health Organization (WHO) standards for reproductive health.',
+              ),
+              _buildCitationItem(
+                '2. Peer-Reviewed Research',
+                'Published studies on menstrual health, cycle patterns, and reproductive wellness from medical journals.',
+              ),
+              _buildCitationItem(
+                '3. AI Health Knowledge Base',
+                'Trained on verified medical literature and health information from authoritative sources.',
+              ),
+              _buildCitationItem(
+                '4. Your Personal Data',
+                'Your tracked cycle data, symptoms, and biometric information for personalized insights.',
+              ),
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppTheme.warningOrange.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: AppTheme.warningOrange.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.info_outline,
+                      size: 18,
+                      color: AppTheme.warningOrange,
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Important: This AI assistant provides general health information. Always consult a qualified healthcare professional for medical advice, diagnosis, or treatment.',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: theme.textTheme.bodyMedium?.color,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Got it'),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget _buildCitationItem(String title, String description) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.check_circle,
+            size: 16,
+            color: AppTheme.accentMint,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 13,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  description,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                    height: 1.3,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

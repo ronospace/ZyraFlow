@@ -87,8 +87,69 @@ class _HealthScreenState extends State<HealthScreen> with TickerProviderStateMix
                     _buildHealthHeader(localizations),
                     const SizedBox(height: 16),
                     
-                    // HealthKit Indicator (Apple App Store Compliance)
-                    const HealthKitIndicatorWidget(isConnected: true),
+                    // Coming Soon Notice
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.successGreen.withValues(alpha: 0.1),
+                            AppTheme.accentMint.withValues(alpha: 0.1),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: AppTheme.successGreen.withValues(alpha: 0.3),
+                          width: 2,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [AppTheme.successGreen, AppTheme.accentMint],
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.health_and_safety,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Health Integration Coming Soon',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: theme.colorScheme.onSurface,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Apple Health & wearable device sync - Q1 2026',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.schedule_rounded,
+                            color: AppTheme.successGreen,
+                            size: 20,
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(height: 24),
                     
                     _buildHealthScoreCard(localizations),

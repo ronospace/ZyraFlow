@@ -365,7 +365,12 @@ class CycleRegularityIndicator extends StatelessWidget {
               size: 20,
             ),
             const SizedBox(width: 8),
-            Text('Cycle Regularity Sources'),
+            Expanded(
+              child: Text(
+                'Cycle Regularity Sources',
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         content: SingleChildScrollView(
